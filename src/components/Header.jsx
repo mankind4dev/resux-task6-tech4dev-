@@ -1,9 +1,10 @@
-import { Button } from "flowbite-react";
+import { Avatar, Button, Dropdown, DropdownDivider, DropdownItem } from "flowbite-react";
 import React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleTheme } from "../redux/theme/themSlice";
+import { logo } from "../assets/images";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export default function Header() {
                   label={
                     <Avatar
                       alt="user"
-                      src={Logo}
+                      src={logo}
                       sx={{ width: 56, height: 56 }}
                       rounded
                     />
@@ -75,8 +76,8 @@ export default function Header() {
                   <Link to="/dashboard">
                     <DropdownItem>Profile</DropdownItem>
                     <DropdownDivider />
-                    <DropdownItem>Sign Out</DropdownItem>
                   </Link>
+                    <DropdownItem>Sign Out</DropdownItem>
                 </Dropdown>
               </>
             ) : (

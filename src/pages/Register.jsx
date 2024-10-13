@@ -8,20 +8,22 @@ import {
   TextInput,
 } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signInSuccess } from "../redux/user/userSlice";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    dispatch(signInSuccess(formData))
     if (
       !formData.firstName ||
       !formData.lastName ||
@@ -38,9 +40,9 @@ export default function Register() {
       setErrorMessage(null);
 
       // Save user data to localStorage
-      const users = JSON.parse(localStorage.getItem('users')) || [];
-      users.push(formData); // Add the new user to the list
-      localStorage.setItem('users', JSON.stringify(users));
+      // const users = JSON.parse(localStorage.getItem('users')) || [];
+      // users.push(formData); // Add the new user to the list
+      // localStorage.setItem('users', JSON.stringify(users));
 
       setLoading(false);
       navigate("/dashboard"); // Redirect to the dashboard or another page
